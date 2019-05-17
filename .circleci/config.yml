@@ -11,6 +11,7 @@ jobs:
       - run:
           name: NPM Ignore
           command:  |
+                  sudo apt-get update
                   sudo npm i -g npmignore
                   sudo apt-get install default-jdk
                   sudo npm install selenium-standalone@latest -g
