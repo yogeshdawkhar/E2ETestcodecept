@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:jessie-browsers
+     
+    working_directory: ~/repo
+    
+    steps:
+      - checkout
+      - run:
+          name: NPM Ignore
+          command:  |
+                  sudo npm i -g npmignore
+                  sudo apt-get install default-jdk
+                  sudo npm install selenium-standalone@latest -g
+                  ls -la
+                  sudo npm i selenium-standalone
+                  sudo selenium-standalone start &
+                  sudo npm install codeceptjs webdriverio --save-dev
+      - run:
+          name: Run Tests
+          command: 'npx codeceptjs run --steps'
